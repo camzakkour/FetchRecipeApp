@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct CategoryCellView: View {
+    
+    let category: CategoriesListViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack(spacing: 20) {
+            
+            AsyncImage(url: category.strCategoryThumb) { image in
+                image.resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 100, maxHeight: 100)
+            } placeholder: {
+                ProgressView()
+            }
+            
+            Text(category.strCategory)
+        }
     }
-}
-
-#Preview {
-    CategoryCellView()
 }

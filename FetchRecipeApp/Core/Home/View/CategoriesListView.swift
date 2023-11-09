@@ -7,17 +7,15 @@
 
 import SwiftUI
 
-struct CategoriesView: View {
+struct CategoriesListView: View {
     
-//    @StateObject var model: CategoriesViewModel = CategoriesListViewModel()
+    let categories: [CategoriesListViewModel]
+    
     var body: some View {
-        NavigationView{
-            Text("Categories")
-                .navigationTitle("Categories")
-        }
+        List(categories) { category in
+            NavigationLink(destination: RecipesView(category: category).navigationTitle(category.strCategory)) {
+                CategoryCellView(category: category)
+            }
+        }.listStyle(.plain)
     }
-}
-
-#Preview {
-    CategoriesView()
 }

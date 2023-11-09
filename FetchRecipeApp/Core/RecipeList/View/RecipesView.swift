@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct RecipesView: View {
+    
+    let category: CategoriesListViewModel
+    @StateObject private var recipeListViewModel = RecipeListViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        RecipeListView(meals: recipeListViewModel.meals)
+            .task {
+                await recipeListViewModel.getRecipesOfCategory(name: category.strCategory)
+            }
     }
-}
-
-#Preview {
-    RecipesView()
 }

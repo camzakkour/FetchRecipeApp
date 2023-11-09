@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct RecipeListView: View {
+    let meals: [RecipesViewModel]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(meals, id: \.idMeal) { recipe in
+            NavigationLink(destination: RecipeDetailView(recipeId: recipe.idMeal,
+                                                         recipeName: recipe.strMeal,
+                                                         recipeImageUrl: recipe.strMealThumb)) {
+                RecipeCellView(meals: recipe)
+            }
+        }
     }
-}
-
-#Preview {
-    RecipeListView()
 }

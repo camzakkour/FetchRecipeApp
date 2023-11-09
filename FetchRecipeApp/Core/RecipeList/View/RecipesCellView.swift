@@ -7,12 +7,22 @@
 
 import SwiftUI
 
-struct RecipesCellView: View {
+struct RecipeCellView: View {
+    
+    let meals: RecipesViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            
+            AsyncImage(url: meals.strMealThumb) { image in
+                image.resizable()
+                    .frame(width: 100, height: 100)
+                    .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
+            } placeholder: {
+                ProgressView()
+            }
+            
+            Text(meals.strMeal)
+        }
     }
-}
-
-#Preview {
-    RecipesCellView()
 }

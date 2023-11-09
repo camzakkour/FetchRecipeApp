@@ -7,12 +7,21 @@
 
 import SwiftUI
 
-struct CategoryView: View {
+struct CategoriesView: View {
+    
+    @StateObject var model: CategoryListViewModel = CategoryListViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            CategoriesListView(categories: model.categories)
+                .task {
+                    await model.getCategories()
+                }
+                .navigationTitle("Categories")
+        }
     }
 }
 
 #Preview {
-    CategoryView()
+    CategoriesView()
 }
